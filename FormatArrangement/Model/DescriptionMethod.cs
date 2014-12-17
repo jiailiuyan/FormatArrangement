@@ -29,7 +29,8 @@ namespace Jisons
             if (starttextindex < endtextindex)
             {
                 var descripttext = new string(description.Skip(starttextindex).Take(endtextindex - starttextindex).ToArray());
-                var lines = descripttext.Split(new string[] { "\r\n", "///" }, StringSplitOptions.RemoveEmptyEntries);
+                var lines = descripttext.Split(new string[] { "\r\n", "///" }, StringSplitOptions.RemoveEmptyEntries).Where(i => !string.IsNullOrWhiteSpace(i)).ToList();
+
                 if (lines.Count() <= 1)
                 {
                     newdescription = new string(startlinespace.Skip(spacecolum).Take(starttext - spacecolum).ToArray()) + StartTitle + lines.FirstOrDefault().TrimStart().TrimEnd() + EndTitle;
